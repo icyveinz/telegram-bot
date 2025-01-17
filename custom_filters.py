@@ -7,7 +7,6 @@ TOKEN = "6907074579:AAFJOtvMEDN8ewOVP4XnxOxWyZY-OTjLXXM"
 # Создаем объекты бота и диспетчера
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
-
 admin_ids: list[int] = [173901673]
 
 
