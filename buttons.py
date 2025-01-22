@@ -1,6 +1,7 @@
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters import CommandStart
 from aiogram.types import KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove, Message
+from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
 TOKEN = "6907074579:AAFJOtvMEDN8ewOVP4XnxOxWyZY-OTjLXXM"
 
@@ -9,16 +10,14 @@ bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
 
-# Создаем объекты кнопок
-button_1 = KeyboardButton(text='Собак 🦮')
-button_2 = KeyboardButton(text='Огурцов 🥒')
+kb_builder = ReplyKeyboardBuilder()
 
-# Создаем объект клавиатуры, добавляя в него кнопки
-keyboard = ReplyKeyboardMarkup(
-    keyboard=[[button_1, button_2]],
-    resize_keyboard=True,
-    one_time_keyboard=True
-)
+buttons: list[KeyboardButton] = [
+    KeyboardButton(text=f'Кнопка {i + 1}') for i in range(10)
+]
+
+kb_builder.row(*buttons, width=3)
+
 
 
 # Этот хэндлер будет срабатывать на команду "/start"
@@ -27,7 +26,7 @@ keyboard = ReplyKeyboardMarkup(
 async def process_start_command(message: Message):
     await message.answer(
         text='Чего кошки боятся больше?',
-        reply_markup=keyboard
+        reply_markup=kb_builder.as_markup(resize_keyboard=True)
     )
 
 
