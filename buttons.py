@@ -14,7 +14,11 @@ button_1 = KeyboardButton(text='Собак 🦮')
 button_2 = KeyboardButton(text='Огурцов 🥒')
 
 # Создаем объект клавиатуры, добавляя в него кнопки
-keyboard = ReplyKeyboardMarkup(keyboard=[[button_1, button_2]])
+keyboard = ReplyKeyboardMarkup(
+    keyboard=[[button_1, button_2]],
+    resize_keyboard=True,
+    one_time_keyboard=True
+)
 
 
 # Этот хэндлер будет срабатывать на команду "/start"
