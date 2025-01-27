@@ -1,6 +1,7 @@
 from aiogram import Bot, Dispatcher, F
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
+from aiogram.filters import Command
 from aiogram.types import Message, BotCommand
 
 LEXICON_RU: dict[str, str] = {
@@ -36,6 +37,13 @@ async def show_help(message: Message):
 @dp.message(F.text.lower().in_(["/start"]))
 async def show_help(message: Message):
     await message.reply(text=LEXICON_RU['/start'])
+
+# Этот хэндлер будет срабатывать на команду "/delmenu"
+# и удалять кнопку Menu c командами
+@dp.message(Command(commands='delmenu'))
+async def del_main_menu(message: Message, bot: Bot):
+    await bot.delete_my_commands()
+    await message.answer(text='Кнопка "Menu" удалена')
 
 
 
