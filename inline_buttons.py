@@ -1,11 +1,11 @@
 from aiogram import Bot, Dispatcher, F
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
-from aiogram.filters import Command, CommandStart
-from aiogram.types import Message, BotCommand, InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.filters import CommandStart
+from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 
 LEXICON_RU: dict[str, str] = {
-    '/start': 'Это пример бота, в котором есть меню с пунктами для отображения пользователю',
+    '/start': 'Документация Telegram Bot API',
     '/help': 'Заходи в репозиторий на ГИТЕ https://github.com/icyveinz/telegram-bot',
 }
 
@@ -21,7 +21,7 @@ url_button_1 = InlineKeyboardButton(
     url='https://null.org/120924'
 )
 url_button_2 = InlineKeyboardButton(
-    text='Документация Telegram Bot API',
+    text=LEXICON_RU.get('/start'),
     url='https://core.telegram.org/bots/api'
 )
 
