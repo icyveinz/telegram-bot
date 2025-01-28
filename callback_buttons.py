@@ -44,9 +44,11 @@ async def process_button_1_press(callback: CallbackQuery):
     if callback.message.text != 'Была нажата БОЛЬШАЯ КНОПКА 1':
         await callback.message.edit_text(
             text='Была нажата БОЛЬШАЯ КНОПКА 1',
-            reply_markup=callback.message.reply_markup
-        )
-    await callback.answer()
+            reply_markup=callback.message.reply_markup)
+    await callback.answer(
+        text='Ура! Нажата кнопка 1',
+        show_alert=True
+    )
 
 
 # Этот хэндлер будет срабатывать на апдейт типа CallbackQuery
