@@ -52,6 +52,20 @@ async def process_start_command(message: Message):
         reply_markup=markup
 )
 
+# Этот хэндлер будет срабатывать на нажатие любой
+# инлайн кнопки и распечатывать апдейт в терминал
+@dp.callback_query(GoodsCallbackFactory.filter())
+async def process_category_press(callback: CallbackQuery,
+                                 callback_data: GoodsCallbackFactory):
+    await callback.message.answer(text=callback_data.pack())
+    await callback.answer()
+
+@dp.callback_query(GoodsCallbackFactory.filter(F.category_id == 1))
+async def process_category_press(callback: CallbackQuery,
+                                 callback_data: GoodsCallbackFactory):
+    await callback.message.answer(text=callback_data.pack())
+    await callback.answer()
+
 
 if __name__ == '__main__':
     dp.run_polling(bot)
