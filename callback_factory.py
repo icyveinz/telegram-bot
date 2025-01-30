@@ -52,18 +52,16 @@ async def process_start_command(message: Message):
         reply_markup=markup
 )
 
-# Этот хэндлер будет срабатывать на нажатие любой
-# инлайн кнопки и распечатывать апдейт в терминал
+# Этот хэндлер будет срабатывать на нажатие любой инлайн кнопки
+# и отправлять в чат форматированный ответ с данными из callback_data
 @dp.callback_query(GoodsCallbackFactory.filter())
 async def process_category_press(callback: CallbackQuery,
                                  callback_data: GoodsCallbackFactory):
-    await callback.message.answer(text=callback_data.pack())
-    await callback.answer()
-
-@dp.callback_query(GoodsCallbackFactory.filter(F.category_id == 1))
-async def process_category_press(callback: CallbackQuery,
-                                 callback_data: GoodsCallbackFactory):
-    await callback.message.answer(text=callback_data.pack())
+    await callback.message.answer(
+        text=f'Категория товаров: {callback_data.category_id}\n'\
+             f'Подкатегория товаров: {callback_data.subcategory_id}\n'\
+             f'Товар: {callback_data.item_id}'
+    )
     await callback.answer()
 
 
