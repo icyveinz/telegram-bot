@@ -47,10 +47,18 @@ async def process_more_press(callback: CallbackQuery):
         [InlineKeyboardButton(text='Хочу еще!', callback_data='more')]
     ]
     markup = InlineKeyboardMarkup(inline_keyboard=keyboard)
-    # Удаляем сообщение, в котором была нажата кнопка
-    await callback.message.delete()
-    # Отправляем в чат новое сообщение с шуткой
-    await callback.message.answer(
+
+    # Пример где сначала удаляем и потом добавляем
+    # # Удаляем сообщение, в котором была нажата кнопка
+    # await callback.message.delete()
+    # # Отправляем в чат новое сообщение с шуткой
+    # await callback.message.answer(
+    #     text=jokes[random_joke()],
+    #     reply_markup=markup
+    # )
+
+    # Пример где редактируем сообщение
+    await callback.message.edit_text(
         text=jokes[random_joke()],
         reply_markup=markup
     )
